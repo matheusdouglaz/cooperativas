@@ -26,7 +26,7 @@ export function CooperativeCard({ cooperative }: CooperativeCardProps) {
           <span className="text-sm">{cooperative.state}</span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-muted-foreground">Sistema:</span>
+          <span className="text-sm font-medium text-muted-foreground">Sistema Cooperativo:</span>
           <span className="text-sm truncate">{cooperative.coopSystem.name}</span>
         </div>
       </CardContent>

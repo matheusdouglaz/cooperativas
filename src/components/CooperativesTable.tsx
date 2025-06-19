@@ -157,7 +157,7 @@ export function CooperativesTable() {
                     </TableHead>
                     <TableHead className="w-[30%] min-w-[140px] max-w-[200px]">
                       <SortableHeader
-                        label="Sistema"
+                        label="Sistema Cooperativo"
                         sortKey="coopSystem"
                         currentSort={sortConfig}
                         onSort={handleSort}
