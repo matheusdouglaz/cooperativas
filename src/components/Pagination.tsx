@@ -15,33 +15,29 @@ export function Pagination({
   onPageChange 
 }: PaginationProps) {
   const getVisiblePages = () => {
-    const delta = 2;
-    const range = [];
-    const rangeWithDots = [];
-
-    for (
-      let i = Math.max(2, currentPage - delta);
-      i <= Math.min(totalPages - 1, currentPage + delta);
-      i++
-    ) {
-      range.push(i);
-    }
-
-    if (currentPage - delta > 2) {
-      rangeWithDots.push(1, '...');
+    // Sempre mostra apenas 3 páginas
+    const pages = [];
+    
+    if (totalPages <= 3) {
+      // Se tem 3 páginas ou menos, mostra todas
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
     } else {
-      rangeWithDots.push(1);
+      // Se tem mais de 3 páginas, mostra 3 páginas inteligentemente
+      if (currentPage <= 2) {
+        // Páginas 1, 2, 3
+        pages.push(1, 2, 3);
+      } else if (currentPage >= totalPages - 1) {
+        // Últimas 3 páginas
+        pages.push(totalPages - 2, totalPages - 1, totalPages);
+      } else {
+        // Página atual e uma antes e depois
+        pages.push(currentPage - 1, currentPage, currentPage + 1);
+      }
     }
-
-    rangeWithDots.push(...range);
-
-    if (currentPage + delta < totalPages - 1) {
-      rangeWithDots.push('...', totalPages);
-    } else {
-      rangeWithDots.push(totalPages);
-    }
-
-    return rangeWithDots;
+    
+    return pages;
   };
 
   if (totalPages <= 1) return null;
@@ -85,25 +81,18 @@ export function Pagination({
           </Button>
         </div>
 
-        {/* Versão desktop: paginação completa */}
+        {/* Versão desktop: sempre 3 botões de página */}
         <div className="hidden sm:flex items-center space-x-2">
-          {getVisiblePages().map((page, index) => (
-            <div key={index}>
-              {page === '...' ? (
-                <span className="px-2 py-1 text-sm text-muted-foreground">
-                  ...
-                </span>
-              ) : (
-                <Button
-                  variant={currentPage === page ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => onPageChange(page as number)}
-                  className="w-8 h-8 p-0"
-                >
-                  {page}
-                </Button>
-              )}
-            </div>
+          {getVisiblePages().map((page) => (
+            <Button
+              key={page}
+              variant={currentPage === page ? "default" : "outline"}
+              size="sm"
+              onClick={() => onPageChange(page)}
+              className="w-8 h-8 p-0"
+            >
+              {page}
+            </Button>
           ))}
         </div>
 
