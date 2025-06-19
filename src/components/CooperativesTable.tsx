@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -10,6 +11,8 @@ import {
 } from '@/components/ui/table';
 import { SortableHeader } from './SortableHeader';
 import { Pagination } from './Pagination';
+import { CooperativeCard } from './CooperativeCard';
+import { ViewToggle } from './ViewToggle';
 import { useCooperatives } from '@/hooks/useCooperatives';
 import { useSorting } from '@/hooks/useSorting';
 import { formatCNPJ } from '@/lib/formatters';
@@ -17,6 +20,7 @@ import { Cooperative } from '@/types/cooperative';
 import { Loader2, AlertCircle } from 'lucide-react';
 
 export function CooperativesTable() {
+  const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
   const { cooperatives, loading, error, totalPages, currentPage, setCurrentPage } = useCooperatives();
   const { sortedData, sortConfig, handleSort } = useSorting(cooperatives);
 
@@ -31,7 +35,7 @@ export function CooperativesTable() {
       <div className="flex items-center justify-center h-64">
         <div className="flex items-center gap-2">
           <Loader2 className="h-6 w-6 animate-spin" />
-          <span>Carregando cooperativas...</span>
+          <span className="text-sm sm:text-base">Carregando cooperativas...</span>
         </div>
       </div>
     );
@@ -42,7 +46,7 @@ export function CooperativesTable() {
       <div className="flex items-center justify-center h-64">
         <div className="flex items-center gap-2 text-destructive">
           <AlertCircle className="h-6 w-6" />
-          <span>Erro: {error}</span>
+          <span className="text-sm sm:text-base">Erro: {error}</span>
         </div>
       </div>
     );
@@ -50,63 +54,152 @@ export function CooperativesTable() {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>
-                <SortableHeader
-                  label="Nome"
-                  sortKey="name"
-                  currentSort={sortConfig}
-                  onSort={handleSort}
-                />
-              </TableHead>
-              <TableHead>
-                <SortableHeader
-                  label="CNPJ"
-                  sortKey="CNPJ"
-                  currentSort={sortConfig}
-                  onSort={handleSort}
-                />
-              </TableHead>
-              <TableHead>
-                <SortableHeader
-                  label="Estado"
-                  sortKey="state"
-                  currentSort={sortConfig}
-                  onSort={handleSort}
-                />
-              </TableHead>
-              <TableHead>
-                <SortableHeader
-                  label="Sistema Cooperativo"
-                  sortKey="coopSystem"
-                  currentSort={sortConfig}
-                  onSort={handleSort}
-                />
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {paginatedData.map((cooperative: Cooperative) => (
-              <TableRow key={cooperative.id}>
-                <TableCell className="font-medium">
-                  {cooperative.name}
-                </TableCell>
-                <TableCell>
-                  {formatCNPJ(cooperative.CNPJ)}
-                </TableCell>
-                <TableCell>
-                  {cooperative.state}
-                </TableCell>
-                <TableCell>
-                  {cooperative.coopSystem.name}
-                </TableCell>
+      {/* Toggle de visualização - visível apenas em tablets */}
+      <div className="flex justify-end">
+        <div className="hidden sm:block md:hidden">
+          <ViewToggle view={viewMode} onViewChange={setViewMode} />
+        </div>
+      </div>
+
+      {/* Versão Desktop: Sempre tabela */}
+      <div className="hidden md:block rounded-md border overflow-hidden">
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="min-w-[200px] sm:min-w-[250px]">
+                  <SortableHeader
+                    label="Nome"
+                    sortKey="name"
+                    currentSort={sortConfig}
+                    onSort={handleSort}
+                  />
+                </TableHead>
+                <TableHead className="min-w-[140px] sm:min-w-[160px]">
+                  <SortableHeader
+                    label="CNPJ"
+                    sortKey="CNPJ"
+                    currentSort={sortConfig}
+                    onSort={handleSort}
+                  />
+                </TableHead>
+                <TableHead className="min-w-[80px] sm:min-w-[100px]">
+                  <SortableHeader
+                    label="Estado"
+                    sortKey="state"
+                    currentSort={sortConfig}
+                    onSort={handleSort}
+                  />
+                </TableHead>
+                <TableHead className="min-w-[180px] sm:min-w-[220px]">
+                  <SortableHeader
+                    label="Sistema Cooperativo"
+                    sortKey="coopSystem"
+                    currentSort={sortConfig}
+                    onSort={handleSort}
+                  />
+                </TableHead>
               </TableRow>
+            </TableHeader>
+            <TableBody>
+              {paginatedData.map((cooperative: Cooperative) => (
+                <TableRow key={cooperative.id}>
+                  <TableCell className="font-medium text-sm sm:text-base">
+                    {cooperative.name}
+                  </TableCell>
+                  <TableCell className="text-xs sm:text-sm font-mono">
+                    {formatCNPJ(cooperative.CNPJ)}
+                  </TableCell>
+                  <TableCell className="text-sm sm:text-base">
+                    {cooperative.state}
+                  </TableCell>
+                  <TableCell className="text-sm sm:text-base">
+                    {cooperative.coopSystem.name}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+
+      {/* Versão Tablet: Toggle entre tabela e cards */}
+      <div className="hidden sm:block md:hidden">
+        {viewMode === 'table' ? (
+          <div className="rounded-md border overflow-hidden">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="min-w-[180px]">
+                      <SortableHeader
+                        label="Nome"
+                        sortKey="name"
+                        currentSort={sortConfig}
+                        onSort={handleSort}
+                      />
+                    </TableHead>
+                    <TableHead className="min-w-[120px]">
+                      <SortableHeader
+                        label="CNPJ"
+                        sortKey="CNPJ"
+                        currentSort={sortConfig}
+                        onSort={handleSort}
+                      />
+                    </TableHead>
+                    <TableHead className="min-w-[80px]">
+                      <SortableHeader
+                        label="Estado"
+                        sortKey="state"
+                        currentSort={sortConfig}
+                        onSort={handleSort}
+                      />
+                    </TableHead>
+                    <TableHead className="min-w-[160px]">
+                      <SortableHeader
+                        label="Sistema"
+                        sortKey="coopSystem"
+                        currentSort={sortConfig}
+                        onSort={handleSort}
+                      />
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {paginatedData.map((cooperative: Cooperative) => (
+                    <TableRow key={cooperative.id}>
+                      <TableCell className="font-medium text-sm">
+                        {cooperative.name}
+                      </TableCell>
+                      <TableCell className="text-xs font-mono">
+                        {formatCNPJ(cooperative.CNPJ)}
+                      </TableCell>
+                      <TableCell className="text-sm">
+                        {cooperative.state}
+                      </TableCell>
+                      <TableCell className="text-sm">
+                        {cooperative.coopSystem.name}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {paginatedData.map((cooperative: Cooperative) => (
+              <CooperativeCard key={cooperative.id} cooperative={cooperative} />
             ))}
-          </TableBody>
-        </Table>
+          </div>
+        )}
+      </div>
+
+      {/* Versão Mobile: Sempre cards */}
+      <div className="sm:hidden space-y-3">
+        {paginatedData.map((cooperative: Cooperative) => (
+          <CooperativeCard key={cooperative.id} cooperative={cooperative} />
+        ))}
       </div>
 
       <Pagination

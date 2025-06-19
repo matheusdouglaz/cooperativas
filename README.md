@@ -55,6 +55,26 @@ A aplicação estará disponível em `http://localhost:3000`
    - Tratamento de erros da API
    - Indicadores visuais para interações
 
+### 📱 **Responsividade Avançada**
+
+1. **Mobile (< 640px)**
+   - Visualização em cards para melhor usabilidade
+   - Paginação simplificada (página atual/total)
+   - Textos e botões otimizados para toque
+   - Layout em coluna única
+
+2. **Tablet (640px - 768px)**
+   - Toggle entre visualização de tabela e cards
+   - Tabela com scroll horizontal quando necessário
+   - Grid de 2 colunas para cards
+   - Paginação completa
+
+3. **Desktop (> 768px)**
+   - Visualização sempre em tabela
+   - Larguras mínimas otimizadas para cada coluna
+   - Paginação completa com navegação intuitiva
+   - Hover states e interações aprimoradas
+
 ## 🏗️ Arquitetura do Projeto
 
 ### Estrutura de Pastas
@@ -67,8 +87,10 @@ src/
 ├── components/            # Componentes React
 │   ├── ui/               # Componentes shadcn/ui
 │   ├── CooperativesTable.tsx
+│   ├── CooperativeCard.tsx
 │   ├── SortableHeader.tsx
-│   └── Pagination.tsx
+│   ├── Pagination.tsx
+│   └── ViewToggle.tsx
 ├── hooks/                # Hooks personalizados
 │   ├── useCooperatives.ts
 │   └── useSorting.ts
@@ -82,13 +104,19 @@ src/
 ### Componentes Principais
 
 #### `CooperativesTable`
-Componente principal que gerencia a exibição da tabela, estados de loading/erro e integração com hooks.
+Componente principal que gerencia a exibição da tabela, estados de loading/erro e integração com hooks. Responsivo com diferentes layouts para mobile, tablet e desktop.
+
+#### `CooperativeCard`
+Componente de card para exibição mobile/tablet das cooperativas com layout otimizado para telas menores.
 
 #### `SortableHeader`
-Componente para cabeçalhos da tabela com funcionalidade de ordenação e indicadores visuais.
+Componente para cabeçalhos da tabela com funcionalidade de ordenação e indicadores visuais responsivos.
 
 #### `Pagination`
-Componente de paginação personalizado com navegação intuitiva.
+Componente de paginação personalizado com navegação intuitiva e layout adaptativo.
+
+#### `ViewToggle`
+Componente para alternar entre visualização de tabela e cards em dispositivos tablet.
 
 ### Hooks Personalizados
 
@@ -131,6 +159,12 @@ Gerencia a lógica de ordenação:
 - Customização via CSS variables
 - Integração perfeita com Tailwind CSS
 
+### 6. **Responsividade**
+- Mobile-first approach
+- Breakpoints bem definidos (sm: 640px, md: 768px)
+- Layouts específicos para cada dispositivo
+- Toggle de visualização para tablets
+
 ## 🔧 Desafios Encontrados
 
 ### 1. **Ordenação de Campos Aninhados**
@@ -144,6 +178,10 @@ Gerencia a lógica de ordenação:
 ### 3. **Paginação com Ordenação**
 - Desafio: Manter ordenação ao navegar entre páginas
 - Solução: Ordenação aplicada antes da paginação
+
+### 4. **Responsividade Mobile**
+- Desafio: Tabela não funciona bem em telas pequenas
+- Solução: Cards para mobile, toggle para tablet, tabela para desktop
 
 ## 🚀 Melhorias Futuras
 
@@ -185,9 +223,24 @@ Gerencia a lógica de ordenação:
 ## 📱 Responsividade
 
 A aplicação é totalmente responsiva e funciona bem em:
-- Desktop (1024px+)
-- Tablet (768px - 1023px)
-- Mobile (320px - 767px)
+
+### **Mobile (320px - 639px)**
+- Cards em coluna única
+- Paginação simplificada
+- Textos otimizados para toque
+- Scroll vertical
+
+### **Tablet (640px - 767px)**
+- Toggle entre tabela e cards
+- Grid de 2 colunas para cards
+- Paginação completa
+- Scroll horizontal na tabela
+
+### **Desktop (768px+)**
+- Tabela sempre visível
+- Paginação completa
+- Hover states
+- Layout otimizado
 
 ## 🌐 API
 

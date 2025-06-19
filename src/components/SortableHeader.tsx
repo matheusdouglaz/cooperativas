@@ -23,10 +23,10 @@ export function SortableHeader({
     if (!isActive) return null;
     
     if (currentSort.direction === 'asc') {
-      return <ChevronUp className="h-4 w-4" />;
+      return <ChevronUp className="h-3 w-3 sm:h-4 sm:w-4" />;
     }
     if (currentSort.direction === 'desc') {
-      return <ChevronDown className="h-4 w-4" />;
+      return <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4" />;
     }
     return null;
   };
@@ -35,10 +35,10 @@ export function SortableHeader({
     <Button
       variant="ghost"
       onClick={() => onSort(sortKey)}
-      className="h-auto p-0 font-semibold hover:bg-transparent"
+      className="h-auto p-0 font-semibold hover:bg-transparent text-xs sm:text-sm"
     >
       <div className="flex items-center gap-1">
-        {label}
+        <span className="truncate">{label}</span>
         {getSortIcon()}
       </div>
     </Button>
