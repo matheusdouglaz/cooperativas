@@ -1,254 +1,181 @@
 # Desafio Front-end - Cooperativas
 
-Aplicação web desenvolvida em Next.js para exibir informações de cooperativas obtidas de uma API REST.
+Uma aplicação web simples e elegante para exibir informações de cooperativas. Desenvolvida com Next.js e TypeScript, essa aplicação consome dados de uma API REST e apresenta as informações de forma organizada e responsiva.
 
-## 🚀 Como executar o projeto
+## 🚀 Como rodar o projeto
 
-### Pré-requisitos
-- Node.js 18+
+### O que você precisa
+- Node.js 18 ou superior
 - npm ou yarn
 
-### Instalação
+### Passo a passo
 ```bash
+# Clone o repositório
 git clone [seu-repositorio]
 cd desafio-front
+
+# Instala as dependências
 npm install
+
+# Roda o projeto
 npm run dev
 ```
 
-A aplicação estará disponível em `http://localhost:3000`
+Pronto! A aplicação vai estar rodando em `http://localhost:3000`
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias que usei
 
-- **Next.js 15** - Framework React com App Router
-- **TypeScript** - Tipagem estática
-- **Tailwind CSS** - Framework de estilização
-- **shadcn/ui** - Componentes de interface
-- **Lucide React** - Ícones
+- **Next.js 15** - Framework React moderno com App Router
+- **TypeScript** - Para ter mais segurança no código
+- **Tailwind CSS** - Para estilizar de forma rápida e consistente
+- **shadcn/ui** - Componentes bonitos e prontos para usar
+- **Lucide React** - Ícones modernos e leves
 
-## 📋 Funcionalidades Implementadas
+## 📋 O que a aplicação faz
 
-### ✅ Funcionalidades Obrigatórias
+### Funcionalidades principais
 
-1. **📋 Exibição em Tabela**
-   - Tabela responsiva utilizando componentes do shadcn/ui
-   - Colunas: Nome, CNPJ, Estado, Sistema Cooperativo
+1. **Tabela de cooperativas**
+   - Mostra nome, CNPJ, estado e sistema cooperativo
+   - Tabela responsiva que funciona bem em qualquer tela
 
-2. **🎭 Formatação de Dados**
-   - CNPJ formatado no padrão XX.XXX.XXX/XXXX-XX
-   - Exemplo: 42898825000115 → 42.898.825/0001-15
+2. **Formatação do CNPJ**
+   - Transforma 42898825000115 em 42.898.825/0001-15
+   - Fica muito mais fácil de ler!
 
-3. **📄 Paginação**
-   - 10 registros por página
-   - Componente de paginação personalizado
-   - Informações sobre página atual e total de páginas
+3. **Paginação**
+   - 10 cooperativas por página
+   - Navegação simples entre as páginas
 
-4. **🔄 Ordenação**
-   - Ordenação clicável em todos os headers
-   - Ciclo: crescente → decrescente → sem ordenação
-   - Indicadores visuais (setas) para estado da ordenação
+4. **Ordenação**
+   - Clica no cabeçalho para ordenar
+   - Primeiro clique: A-Z, segundo: Z-A, terceiro: volta ao normal
+   - Setinhas mostram qual coluna está ordenada
 
-5. **🎨 Interface e UX**
-   - Design limpo e profissional
-   - Responsividade para diferentes tamanhos de tela
-   - Estados de loading durante carregamento
-   - Tratamento de erros da API
-   - Indicadores visuais para interações
+5. **Responsividade**
+   - Funciona bem no celular, tablet e computador
+   - No celular vira cards, no computador fica tabela
 
-### 📱 **Responsividade Avançada**
+## 📱 Como funciona em diferentes telas
 
-1. **Mobile (< 640px)**
-   - Visualização em cards para melhor usabilidade
-   - Paginação simplificada (página atual/total)
-   - Textos e botões otimizados para toque
-   - Layout em coluna única
+### Celular (menos de 640px)
+- Cards em vez de tabela (fica mais fácil de usar)
+- Paginação simplificada
+- Botões maiores para tocar
 
-2. **Tablet (640px - 768px)**
-   - Toggle entre visualização de tabela e cards
-   - Tabela com scroll horizontal quando necessário
-   - Grid de 2 colunas para cards
-   - Paginação completa
+### Tablet (640px - 768px)
+- Você pode escolher entre tabela ou cards
+- Tabela com scroll horizontal se precisar
+- Cards em duas colunas
 
-3. **Desktop (> 768px)**
-   - Visualização sempre em tabela
-   - Larguras mínimas otimizadas para cada coluna
-   - Paginação completa com navegação intuitiva
-   - Hover states e interações aprimoradas
+### Computador (mais de 768px)
+- Sempre mostra a tabela completa
+- Paginação completa
+- Hover effects nos botões
 
-## 🏗️ Arquitetura do Projeto
+## 🏗️ Como organizei o código
 
-### Estrutura de Pastas
+### Estrutura das pastas
 ```
 src/
-├── app/                    # App Router do Next.js
-│   ├── globals.css        # Estilos globais
-│   ├── layout.tsx         # Layout principal
-│   └── page.tsx           # Página inicial
-├── components/            # Componentes React
-│   ├── ui/               # Componentes shadcn/ui
+├── app/                    # Arquivos do Next.js
+├── components/            # Componentes que criei
+│   ├── ui/               # Componentes do shadcn/ui
 │   ├── CooperativesTable.tsx
 │   ├── CooperativeCard.tsx
 │   ├── SortableHeader.tsx
 │   ├── Pagination.tsx
 │   └── ViewToggle.tsx
 ├── hooks/                # Hooks personalizados
-│   ├── useCooperatives.ts
-│   └── useSorting.ts
-├── lib/                  # Utilitários
-│   ├── utils.ts          # Utilitários do shadcn/ui
-│   └── formatters.ts     # Formatadores de dados
-└── types/                # Definições TypeScript
-    └── cooperative.ts
+├── lib/                  # Funções utilitárias
+└── types/                # Definições do TypeScript
 ```
 
-### Componentes Principais
+### Componentes principais
 
-#### `CooperativesTable`
-Componente principal que gerencia a exibição da tabela, estados de loading/erro e integração com hooks. Responsivo com diferentes layouts para mobile, tablet e desktop.
+**CooperativesTable** - O componente principal que controla tudo
+**CooperativeCard** - Card bonito para mostrar no celular
+**SortableHeader** - Cabeçalho da tabela que pode ordenar
+**Pagination** - Navegação entre páginas
+**ViewToggle** - Botão para trocar entre tabela e cards
 
-#### `CooperativeCard`
-Componente de card para exibição mobile/tablet das cooperativas com layout otimizado para telas menores.
+### Hooks que criei
 
-#### `SortableHeader`
-Componente para cabeçalhos da tabela com funcionalidade de ordenação e indicadores visuais responsivos.
+**useCooperatives** - Busca os dados da API e controla loading/erro
+**useSorting** - Gerencia a ordenação da tabela
 
-#### `Pagination`
-Componente de paginação personalizado com navegação intuitiva e layout adaptativo.
+## 🎯 Por que fiz essas escolhas
 
-#### `ViewToggle`
-Componente para alternar entre visualização de tabela e cards em dispositivos tablet.
+### Separação de responsabilidades
+Cada componente tem uma função específica. Isso deixa o código mais fácil de entender e manter.
 
-### Hooks Personalizados
+### TypeScript
+Ajuda a pegar erros antes de rodar o código. Vale a pena o tempo extra para escrever os tipos!
 
-#### `useCooperatives`
-Gerencia o estado dos dados das cooperativas, incluindo:
-- Fetch de dados da API
-- Estados de loading e erro
-- Paginação
+### Performance
+Uso `useMemo` para não recalcular a ordenação desnecessariamente. Paginação client-side para ser mais rápido.
 
-#### `useSorting`
-Gerencia a lógica de ordenação:
-- Estado da ordenação atual
-- Função de ordenação
-- Ciclo de ordenação (asc → desc → null)
+### UX/UI
+Estados de loading e erro bem claros. Feedback visual para todas as ações do usuário.
 
-## 🎯 Decisões Técnicas
+### shadcn/ui
+Componentes bonitos e consistentes. Não precisei inventar a roda!
 
-### 1. **Separação de Responsabilidades**
-- Hooks personalizados para lógica de negócio
-- Componentes reutilizáveis e focados
-- Utilitários separados para formatação
+### Responsividade
+Pensei primeiro no celular (mobile-first). Cada tamanho de tela tem a melhor experiência possível.
 
-### 2. **TypeScript**
-- Tipagem completa para todas as interfaces
-- Tipos específicos para cooperativas e sistemas
-- Melhor DX e prevenção de erros
+## 🔧 Desafios que encontrei
 
-### 3. **Performance**
-- `useMemo` para ordenação otimizada
-- Paginação client-side para melhor UX
-- Componentes otimizados com React.memo quando necessário
+### Ordenação de campos aninhados
+O campo `coopSystem.name` é um objeto dentro de outro. Tive que criar uma lógica especial para ordenar por ele.
 
-### 4. **UX/UI**
-- Estados de loading e erro bem definidos
-- Feedback visual para interações
-- Design responsivo e acessível
+### Formatação do CNPJ
+Regex para transformar números em formato brasileiro. Ficou bem legal!
 
-### 5. **shadcn/ui**
-- Componentes consistentes e acessíveis
-- Customização via CSS variables
-- Integração perfeita com Tailwind CSS
+### Paginação com ordenação
+Tinha que garantir que a ordenação continuasse funcionando ao trocar de página.
 
-### 6. **Responsividade**
-- Mobile-first approach
-- Breakpoints bem definidos (sm: 640px, md: 768px)
-- Layouts específicos para cada dispositivo
-- Toggle de visualização para tablets
+### Responsividade mobile
+Tabela não funciona bem no celular. A solução foi usar cards para mobile e manter a tabela para desktop.
 
-## 🔧 Desafios Encontrados
+## 🚀 O que eu faria se tivesse mais tempo
 
-### 1. **Ordenação de Campos Aninhados**
-- Desafio: Ordenar por `coopSystem.name`
-- Solução: Lógica específica no hook `useSorting`
+### Funcionalidades extras
+- Filtros por estado e sistema cooperativo
+- Busca por nome
+- Exportar para Excel
+- Modal com detalhes da cooperativa
 
-### 2. **Formatação de CNPJ**
-- Desafio: Aplicar máscara XX.XXX.XXX/XXXX-XX
-- Solução: Função utilitária com regex
+### Melhorias técnicas
+- Testes automatizados
+- Cache dos dados
+- Lazy loading
+- Error boundaries
 
-### 3. **Paginação com Ordenação**
-- Desafio: Manter ordenação ao navegar entre páginas
-- Solução: Ordenação aplicada antes da paginação
-
-### 4. **Responsividade Mobile**
-- Desafio: Tabela não funciona bem em telas pequenas
-- Solução: Cards para mobile, toggle para tablet, tabela para desktop
-
-## 🚀 Melhorias Futuras
-
-### Funcionalidades Adicionais
-1. **Filtros**
-   - Filtro por estado
-   - Filtro por sistema cooperativo
-   - Busca por nome
-
-2. **Exportação**
-   - Exportar dados para CSV/Excel
-   - Impressão da tabela
-
-3. **Detalhes**
-   - Modal com detalhes da cooperativa
-   - Histórico de alterações
-
-4. **Performance**
-   - Virtualização para grandes datasets
-   - Cache de dados com React Query
-   - Lazy loading de componentes
-
-### Melhorias Técnicas
-1. **Testes**
-   - Testes unitários com Jest
-   - Testes de integração
-   - Testes E2E com Playwright
-
-2. **Monitoramento**
-   - Error boundary
-   - Analytics de uso
-   - Performance monitoring
-
-3. **Acessibilidade**
-   - Navegação por teclado
-   - Screen reader support
-   - Contraste melhorado
+### Acessibilidade
+- Navegação por teclado
+- Suporte a screen readers
+- Melhor contraste
 
 ## 📱 Responsividade
 
-A aplicação é totalmente responsiva e funciona bem em:
+A aplicação funciona bem em qualquer dispositivo:
 
-### **Mobile (320px - 639px)**
-- Cards em coluna única
-- Paginação simplificada
-- Textos otimizados para toque
-- Scroll vertical
+**Celular** - Cards fáceis de tocar
+**Tablet** - Você escolhe entre tabela ou cards
+**Computador** - Tabela completa com todas as funcionalidades
 
-### **Tablet (640px - 767px)**
-- Toggle entre tabela e cards
-- Grid de 2 colunas para cards
-- Paginação completa
-- Scroll horizontal na tabela
+## 🌐 Sobre a API
 
-### **Desktop (768px+)**
-- Tabela sempre visível
-- Paginação completa
-- Hover states
-- Layout otimizado
-
-## 🌐 API
-
-- **Endpoint**: `https://subscribe-api-production.up.railway.app/api/v1/coops`
+- **URL**: `https://subscribe-api-production.up.railway.app/api/v1/coops`
 - **Método**: GET
-- **Autenticação**: Não necessária
-- **Formato**: JSON
+- **Autenticação**: Não precisa
+- **Resposta**: Array de cooperativas em JSON
 
-## 📄 Licença
+## 📄 Sobre o projeto
 
-Este projeto foi desenvolvido como parte de um teste técnico.
+Este projeto foi desenvolvido como parte de um teste técnico para vaga de desenvolvedor front-end. Tentei mostrar boas práticas, código limpo e uma experiência de usuário agradável.
+
+---
+
+*Espero que gostem do resultado! 😊*
