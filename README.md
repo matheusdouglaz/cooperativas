@@ -2,7 +2,7 @@
 
 Uma aplicação web simples e elegante para exibir informações de cooperativas. Desenvolvida com Next.js e TypeScript, essa aplicação consome dados de uma API REST e apresenta as informações de forma organizada e responsiva.
 
-## 🚀 Como rodar o projeto
+## Como rodar o projeto
 
 ### O que você precisa
 - Node.js 18 ou superior
@@ -23,7 +23,7 @@ npm run dev
 
 Pronto! A aplicação vai estar rodando em `http://localhost:3000`
 
-## 🛠️ Tecnologias que usei
+## Tecnologias que usei
 
 - **Next.js 15** - Framework React moderno com App Router
 - **TypeScript** - Para ter mais segurança no código
@@ -31,7 +31,7 @@ Pronto! A aplicação vai estar rodando em `http://localhost:3000`
 - **shadcn/ui** - Componentes bonitos e prontos para usar
 - **Lucide React** - Ícones modernos e leves
 
-## 📋 O que a aplicação faz
+## O que a aplicação faz
 
 ### Funcionalidades principais
 
@@ -56,7 +56,7 @@ Pronto! A aplicação vai estar rodando em `http://localhost:3000`
    - Funciona bem no celular, tablet e computador
    - No celular vira cards, no computador fica tabela
 
-## 📱 Como funciona em diferentes telas
+## Como funciona em diferentes telas
 
 ### Celular (menos de 640px)
 - Cards em vez de tabela (fica mais fácil de usar)
@@ -104,7 +104,7 @@ src/
 **useCooperatives** - Busca os dados da API e controla loading/erro
 **useSorting** - Gerencia a ordenação da tabela
 
-## 🎯 Por que fiz essas escolhas
+## Por que fiz essas escolhas
 
 ### Separação de responsabilidades
 Cada componente tem uma função específica. Isso deixa o código mais fácil de entender e manter.
@@ -124,7 +124,7 @@ Componentes bonitos e consistentes. Não precisei inventar a roda!
 ### Responsividade
 Pensei primeiro no celular (mobile-first). Cada tamanho de tela tem a melhor experiência possível.
 
-## 🔧 Desafios que encontrei
+## Desafios que encontrei
 
 ### Ordenação de campos aninhados
 O campo `coopSystem.name` é um objeto dentro de outro. Tive que criar uma lógica especial para ordenar por ele.
@@ -138,7 +138,7 @@ Tinha que garantir que a ordenação continuasse funcionando ao trocar de págin
 ### Responsividade mobile
 Tabela não funciona bem no celular. A solução foi usar cards para mobile e manter a tabela para desktop.
 
-## 🚀 O que eu faria se tivesse mais tempo
+## Melhorias Futuras
 
 ### Funcionalidades extras
 - Filtros por estado e sistema cooperativo
@@ -157,7 +157,7 @@ Tabela não funciona bem no celular. A solução foi usar cards para mobile e ma
 - Suporte a screen readers
 - Melhor contraste
 
-## 📱 Responsividade
+## Responsividade
 
 A aplicação funciona bem em qualquer dispositivo:
 
@@ -165,17 +165,17 @@ A aplicação funciona bem em qualquer dispositivo:
 **Tablet** - Você escolhe entre tabela ou cards
 **Computador** - Tabela completa com todas as funcionalidades
 
-## 🌐 Sobre a API
+## Sobre a API
 
 - **URL**: `https://subscribe-api-production.up.railway.app/api/v1/coops`
 - **Método**: GET
 - **Autenticação**: Não precisa
 - **Resposta**: Array de cooperativas em JSON
 
-## 📄 Sobre o projeto
+## Sobre o projeto
 
 Este projeto foi desenvolvido como parte de um teste técnico para vaga de desenvolvedor front-end. Tentei mostrar boas práticas, código limpo e uma experiência de usuário agradável.
 
 ---
 
-*Espero que gostem do resultado! 😊*
+*Espero que gostem do resultado!*

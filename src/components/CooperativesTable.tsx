@@ -67,7 +67,7 @@ export function CooperativesTable() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="min-w-[200px] sm:min-w-[250px]">
+                <TableHead className="w-[300px]">
                   <SortableHeader
                     label="Nome"
                     sortKey="name"
@@ -75,7 +75,7 @@ export function CooperativesTable() {
                     onSort={handleSort}
                   />
                 </TableHead>
-                <TableHead className="min-w-[140px] sm:min-w-[160px]">
+                <TableHead className="w-[180px]">
                   <SortableHeader
                     label="CNPJ"
                     sortKey="CNPJ"
@@ -83,7 +83,7 @@ export function CooperativesTable() {
                     onSort={handleSort}
                   />
                 </TableHead>
-                <TableHead className="min-w-[80px] sm:min-w-[100px]">
+                <TableHead className="w-[100px]">
                   <SortableHeader
                     label="Estado"
                     sortKey="state"
@@ -91,7 +91,7 @@ export function CooperativesTable() {
                     onSort={handleSort}
                   />
                 </TableHead>
-                <TableHead className="min-w-[180px] sm:min-w-[220px]">
+                <TableHead className="w-[250px]">
                   <SortableHeader
                     label="Sistema Cooperativo"
                     sortKey="coopSystem"
@@ -104,7 +104,7 @@ export function CooperativesTable() {
             <TableBody>
               {paginatedData.map((cooperative: Cooperative) => (
                 <TableRow key={cooperative.id}>
-                  <TableCell className="font-medium text-sm sm:text-base">
+                  <TableCell className="font-medium text-sm sm:text-base truncate">
                     {cooperative.name}
                   </TableCell>
                   <TableCell className="text-xs sm:text-sm font-mono">
@@ -113,7 +113,7 @@ export function CooperativesTable() {
                   <TableCell className="text-sm sm:text-base">
                     {cooperative.state}
                   </TableCell>
-                  <TableCell className="text-sm sm:text-base">
+                  <TableCell className="text-sm sm:text-base truncate">
                     {cooperative.coopSystem.name}
                   </TableCell>
                 </TableRow>
@@ -131,7 +131,7 @@ export function CooperativesTable() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="min-w-[180px]">
+                    <TableHead className="w-[200px]">
                       <SortableHeader
                         label="Nome"
                         sortKey="name"
@@ -139,7 +139,7 @@ export function CooperativesTable() {
                         onSort={handleSort}
                       />
                     </TableHead>
-                    <TableHead className="min-w-[120px]">
+                    <TableHead className="w-[140px]">
                       <SortableHeader
                         label="CNPJ"
                         sortKey="CNPJ"
@@ -147,7 +147,7 @@ export function CooperativesTable() {
                         onSort={handleSort}
                       />
                     </TableHead>
-                    <TableHead className="min-w-[80px]">
+                    <TableHead className="w-[80px]">
                       <SortableHeader
                         label="Estado"
                         sortKey="state"
@@ -155,7 +155,7 @@ export function CooperativesTable() {
                         onSort={handleSort}
                       />
                     </TableHead>
-                    <TableHead className="min-w-[160px]">
+                    <TableHead className="w-[180px]">
                       <SortableHeader
                         label="Sistema"
                         sortKey="coopSystem"
@@ -168,7 +168,7 @@ export function CooperativesTable() {
                 <TableBody>
                   {paginatedData.map((cooperative: Cooperative) => (
                     <TableRow key={cooperative.id}>
-                      <TableCell className="font-medium text-sm">
+                      <TableCell className="font-medium text-sm truncate">
                         {cooperative.name}
                       </TableCell>
                       <TableCell className="text-xs font-mono">
@@ -177,7 +177,7 @@ export function CooperativesTable() {
                       <TableCell className="text-sm">
                         {cooperative.state}
                       </TableCell>
-                      <TableCell className="text-sm">
+                      <TableCell className="text-sm truncate">
                         {cooperative.coopSystem.name}
                       </TableCell>
                     </TableRow>

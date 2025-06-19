@@ -5,7 +5,7 @@ import { Cooperative, SortConfig, SortDirection } from '@/types/cooperative';
 
 export function useSorting<T extends Cooperative>(data: T[]) {
   const [sortConfig, setSortConfig] = useState<SortConfig>({
-    key: 'name',
+    key: 'name' as keyof Cooperative,
     direction: null,
   });
 
