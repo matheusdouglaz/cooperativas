@@ -73,7 +73,7 @@ Pronto! A aplicação vai estar rodando em `http://localhost:3000`
 - Paginação completa
 - Hover effects nos botões
 
-## 🏗️ Como organizei o código
+## Como organizei o código
 
 ### Estrutura das pastas
 ```
